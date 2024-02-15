@@ -1,0 +1,58 @@
+import pygame
+import random
+
+pygame.init()
+gamescreen = pygame.display.set_mode((900,900))
+pygame.display.set_caption("Single Particle Movement")
+clock = pygame.time.Clock()
+
+#particle set up
+xpos = []
+ypos = []
+xVel = []
+yVel = []
+
+#create particles
+for i in range(100):
+        xpos.append(450)
+        ypos.append(450)
+        xVel.append(random.randint(-2, 2))
+        yVel.append(random.randint(-2, 2))
+
+    #game loop
+while True:
+        clock.tick(60)
+       
+        #event handling
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                break
+           
+        # Physics
+        for i in range(100):
+            # Update position
+            xpos[i] += xVel[i]
+            ypos[i] += yVel[i]
+            ticker[i] += 1
+            
+            xpos[i] += xvel[i]
+            ypos[i] += yvel[i]
+            sizes[i] = sizes[i] + 0.05
+            
+            
+        # Boundary checking
+            if xpos[i] < 0 or xpos[i] > 900:
+                xVel[i] = random.randint(-2, 2)
+                xpos[i] = 450
+            if ypos[i] < 0 or ypos[i] > 900:
+                yVel[i] = random.randint(-2, 2)
+                ypos[i] = 450
+           
+       
+        for i in range(100):
+                pygame.draw.circle(gamescreen, (0,random.randrange(0,255),0), (xpos[i], ypos[i]), 3)
+       
+        pygame.display.flip()
+       
+# End of game loop
+pygame.quit()
